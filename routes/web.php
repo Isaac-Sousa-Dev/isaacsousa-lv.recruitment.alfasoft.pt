@@ -17,7 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $contacts = Contact::orderBy('created_at', 'desc')->paginate(10);
+    return view('welcome', [
+        'contacts' => $contacts,
+    ]);
+    
 });
 
 Route::get('/dashboard', function () {
